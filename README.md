@@ -1,97 +1,55 @@
-<H3>NAME:ADHITHYA PERUMAL D</H3>
-<H3>REGISTER NO:212222230007</H3>
-<H3>EX.NO:6</H3>
-<H3>DATE:21/10/2024</H3>
-<H1 ALIGN =CENTER>Implementation of Semantic Analysis</H1>
-
-## AIM:
-To perform Parts of speech identification and Synonym using Natural Language Processing (NLP) techniques.
- 
-## ALGORITHM:
-### STEP 1:
-Import the nltk library.
-### STEP 2:
-Download the 'punkt', 'wordnet', and 'averaged_perceptron_tagger' resources.
-### STEP 3:
-Accept user input for the text.
-### STEP 4:
-Tokenize the input text into words using the word_tokenize function.
-### STEP 5:
-Iterate through each word in the tokenized text.
-•	Perform part-of-speech tagging on the tokenized words using nltk.pos_tag.
-•	Print each word along with its corresponding part-of-speech tag.
-•	For each verb , iterate through its synsets (sets of synonyms) using wordnet.synsets(word).
-•	Extract synonyms and antonyms using lemma.name() and lemma.antonyms()[0].name() respectively.
+# EX-06 Implementation of Semantic Analysis
+### Aim: 
+To perform Parts of speech identification and Synonym using Natural Language &emsp;&emsp;&emsp;&emsp;**DATE :22-10-2024**<br>Processing (NLP) techniques.
+### Algorithm:
+Step 1: Import the nltk library.<br>
+Step 2: Download the 'punkt', 'wordnet', and 'averaged_perceptron_tagger' resources.<br>
+Step 3:Accept user input for the text.<br>
+Step 4:Tokenize the input text into words using the word_tokenize function.<br>
+Step 5:Iterate through each word in the tokenized text.<br>
+•	Perform part-of-speech tagging on the tokenized words using nltk.pos_tag.<br>
+•	Print each word along with its corresponding part-of-speech tag.<br>
+•	For each verb , iterate through its synsets (sets of synonyms) using wordnet.synsets(word).<br>
+•	Extract synonyms and antonyms using lemma.name() and lemma.antonyms()[0].name() respectively.<br>
 •	Print the unique sets of synonyms and antonyms.
-
-## PROGRAM:
-```
-!pip install nltk
-
+### Program:
+##### Importing NLTK and Resource Downloads
+```Python
 import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import wordnet
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
+nltk.download( 'punkt' )
 nltk.download('wordnet')
-
-f = open("/content/sample_data.txt", "r")
-sentences = f.readlines()
-f.close()
-
-verbs = [[] for _ in sentences]
-i=0
-for sentence in sentences:
-  print("Sentence",i+1,":", sentence)
-
-  # Tokenize the sentence into words
-  words = word_tokenize(sentence)
-
-  # Identify the parts of speech for each word
-  pos_tags = nltk.pos_tag(words)
-
-  # Print the parts of speech
-  for word,tag in pos_tags:
-    print(word,"->",tag)
-
-    # Save verbs
-    if tag.startswith('VB'):
-      verbs[i].append(word)
-  i+=1
-  print("\n\n")
-
-# Identify synonyms and antonyms for each word
-print("Synonyms and Antonymns for verbs in each sentence:\n")
-i=0
-for sentence in sentences:
-  print("Sentence",i+1,":", sentence)
-  pos_tags = nltk.pos_tag(verbs[i])
-  for word,tag in pos_tags:
-    print(word,"->",tag)
-    synonyms = []
-    antonyms = []
+nltk.download('omw-1.4')
+from nltk.tokenize import word_tokenize
+nltk.download( 'averaged_perceptron_tagger' )
+from nltk.corpus import wordnet
+```
+##### Tokenization and Part-of-Speech Tagging
+```Python
+sentence=input()
+words = word_tokenize(sentence)
+pos_tags= nltk.pos_tag(words)
+for word, tag in pos_tags:
+    print(f"{word:<6} - {tag}")
+```
+##### Extracting Synonyms and Antonyms from Words
+```Python
+synonyms =[]
+antonyms =[]
+for word in words:
     for syn in wordnet.synsets(word):
-      for lemma in syn.lemmas():
-        synonyms.append(lemma.name())
-        if lemma.antonyms():
-          for antonym in lemma.antonyms():
-            antonyms.append(antonym.name())
-
-    # Print the synonyms and antonyms
-    print("Synonyms:",set(synonyms))
-    print("Antonyms:", set(antonyms) if antonyms else "None")
-    print()
-  print("\n\n")
-  i+=1
+        for lemma in syn.lemmas():
+            synonyms.append (lemma.name())
+            if lemma.antonyms():
+                antonyms.append (lemma.antonyms()[0].name())
+print ( "Synonyms : " ,set(synonyms))
+print ( "Antonyms : " ,set(antonyms))
 ```
 
-## OUTPUT:
-### PARTS OF SPEECH:
-![image](https://github.com/user-attachments/assets/41216163-157c-4059-a32b-dc2367fa70bd)
-
-### SYNONYMS AND ANTONYMS:
-![image](https://github.com/user-attachments/assets/aa471c25-f7a1-4833-be9a-d2e177af622b)
-
-
-## RESULT:
-Thus, the program to perform the Parts of Speech identification and Synonyms executed successfully.
+### Output:
+##### Parts of Speech:
+![image](https://github.com/user-attachments/assets/17312b9e-5714-48c9-ab04-bb32a8507b0d)
+##### Synonyms and Antonyms:
+![image](https://github.com/user-attachments/assets/0c66c14f-b7f5-44cd-898e-18e906113885)
+### Result:
+Thus ,the program to perform the Parts of Speech identification and Synonymis executed sucessfully.<br>
+**Developed By: SHARAN MJ - 212222240097**
